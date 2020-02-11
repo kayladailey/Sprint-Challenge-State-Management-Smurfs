@@ -17,6 +17,8 @@ const SmurfForm = ({ addSmurf, error }) => {
       setHeight('');
    };
 
+
+
    return (
       <div>
 
