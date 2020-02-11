@@ -1,27 +1,14 @@
-// import React, {useState, useEffect, useContext} from 'react';
-// import axios from 'axios';
+import React from "react";
+import Smurf from './Smurf';
 
-// //Components
-// import Smurf from './Smurf';
-// //Context
-// import {SmurfContext} from '../contexts/SmurfContext';
+const SmurfList = ({ smurfs }) => {
+  return (
+    <div className="cards">
+      {smurfs.map(smurf => 
+        <Smurf key={smurf.id} smurf={smurf} />
+      )}
+    </div>
+  );
+};
 
-
-// const  SmurfList = () => {
-//     const [smurf, setSmurf] = useState();
-
-
-
-
-//       return (
-// 		<div className="smurfs">
-// 			{setSmurf.smurfs.map(smurf=> (
-// 				<Smurf
-// 					key={smurf.name}
-// 					smurf={smurf}
-// 				/>
-// 			))}
-// 		</div>
-//       )}
-
-//       export default SmurfList;
+export default SmurfList;

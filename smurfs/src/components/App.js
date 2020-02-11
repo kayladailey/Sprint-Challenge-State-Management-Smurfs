@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-import './App.css';
-import Smurf from '../components/Smurf';
-import { SmurfContext } from '../contexts/SmurfContext';
+import React, { useEffect } from "react";
 import SmurfForm from './SmurfForm';
-
-function App() {
-	const [ smurf, setSmurf ] = useState([{}]);
-
-	useEffect(() => {
-    axios
-    .get('http://localhost:3333/smurfs')
-   // .then(res => console.log(res.data))
-   .then(res => { 
-     setSmurf({smurf: res.data})
-     .catch(err => console.log('Error', err))
-   })
-  }, []);
+import SmurfList from './SmurfList';
+import { getSmurfs, postSmurf } from '../actions';
+import { connect } from "react-redux";
 
 
-  
-	return (
-		<SmurfContext.Provider value={smurf}>
-			<div className="container">
-			{setSmurf.smurfs.map(smurf=> (
-		<h2>{smurf.name}</h2>
-			))}
-        <SmurfForm/>
-			</div>
-		</SmurfContext.Provider>
-	);
+const App = ({smurfs, getSmurfs, postSmurf }) => {
+  useEffect(() => {
+    getSmurfs();
+  }, [getSmurfs])
+
+  return (
+    <div className="App">
+        <h1>Smurfs</h1>
+        <SmurfForm postSmurf={postSmurf} />
+        <SmurfList smurfs={smurfs} />
+    </div>
+  );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    smurfs: state.smurfs,
+    gettingSmurfs: state.gettingSmurfs,
+    postingSmurf: state.postingSmurf,
+    error: state.error
+  }
+}
+
+export default connect(mapStateToProps, { getSmurfs, postSmurf })(App);

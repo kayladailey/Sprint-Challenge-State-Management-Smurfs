@@ -1,15 +1,16 @@
-import React, {useContext} from 'react';
-import { SmurfContext } from '../contexts/SmurfContext';
+import React from "react";
 
-function Smurf() {
-	const smurf = useContext(SmurfContext);
-console.log('hello', smurf.name);
-	return (
-		<div className="smurf">
-				<h1>Smurf Village</h1>
-				{smurf.name}, {smurf.age}
-		</div>
-	);
+
+const Smurf = ({smurf}) => {
+  return (
+
+      <div>
+          <h2>{smurf.name}</h2>
+          <p>{smurf.age}</p>
+          <p>{smurf.height}</p>
+      </div>
+
+  );
 };
 
 export default Smurf;
